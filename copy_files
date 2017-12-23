@@ -4,7 +4,8 @@ file=`ls -Art *.mp4 | tail -n 1`
 year=`date +%Y`
 month=`date +%m`
 day=`date +%d`
+bucket_name="YOUR BUCKET NAME HERE"
 while inotifywait -q -e close_write $file >/dev/null; do
     echo "copying $file"
-    aws s3 mv $file s3://madisoncam/cam01/$year/$month/$day/$file
+    aws s3 mv $file s3://${bucket_name}/cam01/$year/$month/$day/$file
 done
