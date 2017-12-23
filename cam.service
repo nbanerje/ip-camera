@@ -1,0 +1,11 @@
+[Unit]
+Description=RecordCam
+After=network-online.target
+
+[Service]
+Type=simple
+ExecStart=/home/ubuntu/recordCam.sh
+Restart=always
+
+[Install]
+WantedBy=default.target
