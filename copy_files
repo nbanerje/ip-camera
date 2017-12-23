@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+cd /home/ubuntu
+file=`ls -Art *.mp4 | tail -n 1`
+year=`date +%Y`
+month=`date +%m`
+day=`date +%d`
+while inotifywait -q -e close_write $file >/dev/null; do
+    echo "copying $file"
+    aws s3 mv $file s3://madisoncam/cam01/$year/$month/$day/$file
+done
