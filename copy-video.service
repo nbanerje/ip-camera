@@ -1,0 +1,11 @@
+[Unit]
+Description=copy-video
+After=cam.target
+
+[Service]
+Type=simple
+ExecStart=/home/ubuntu/copy_files
+Restart=always
+
+[Install]
+WantedBy=default.target
