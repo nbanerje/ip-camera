@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
-cd /home/ubuntu
-file=`ls -Art *.mp4 | tail -n 1`
-year=`date +%Y`
-month=`date +%m`
-day=`date +%d`
-bucket_name="YOUR BUCKET NAME HERE"
-while inotifywait -q -e close_write $file >/dev/null; do
-    echo "copying $file"
-    aws s3 mv $file s3://${bucket_name}/cam01/$year/$month/$day/$file
+bucket_name="YOUR BUCKET NAME"
+basePath=/home/ubuntu/videos
+cd $basePath
+
+inotifywait -m -q -e close_write --format %f . | while IFS= read -r file; do
+   year=`date +%Y`
+   month=`date +%m`
+   day=`date +%d`
+   aws s3 mv "$basePath/$file" s3://${bucket_name}/cam01/$year/$month/$day/$file
 done
