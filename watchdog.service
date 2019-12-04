@@ -1,0 +1,11 @@
+[Unit]
+Description=watchdog
+After=copy-video.target
+
+[Service]
+Type=simple
+ExecStart=/home/ubuntu/watchdog.sh
+Restart=always
+
+[Install]
+WantedBy=default.target
